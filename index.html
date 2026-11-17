@@ -271,6 +271,7 @@
             border-radius: 16px;
             margin-top: 25px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            scroll-margin-top: 70px;
         }
 
         .checkout-section h3 {
@@ -565,7 +566,7 @@
     <!-- شريط الأقسام السريع -->
     <nav class="category-nav" id="category-nav"></nav>
 
-    <!-- حاوية المنيو (تُبنى تلقائياً من البيانات بالأسفل) -->
+    <!-- حاوية المنيو -->
     <div class="container" id="menu-container"></div>
 
     <!-- قسم ملخص الطلب والدفع -->
@@ -611,20 +612,22 @@
     </a>
 
     <script>
-        // ==========================================
-        // 1. لوحة إعدادات المطعم (عدّل هنا فقط لأي عميل جديد)
-        // ==========================================
+        // التأكد من أن الصفحة تبدأ دائماً من أعلى نقطة عند الفتح
+        if (window.location.hash) {
+            history.replaceState(null, null, window.location.pathname);
+        }
+        window.scrollTo(0, 0);
+
+        // إعدادات المطعم
         const CONFIG = {
             restaurantName: "مطعم زيتون",
             subtitle: "المنيو الرقمي",
-            whatsappNumber: "201021946002", // رقم الواتساب بكود الدولة بدون +
+            whatsappNumber: "201021946002",
             currency: "ريال",
             tableCount: 10
         };
 
-        // ==========================================
-        // 2. بيانات الأقسام والأصناف (ضِف أو عدّل براحتك)
-        // ==========================================
+        // بيانات الأقسام والأصناف
         const MENU_DATA = [
             {
                 id: "cat-kabsa",
@@ -650,7 +653,7 @@
             {
                 id: "cat-grills",
                 title: "قسم المشاوي على الفحم",
-                banner: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop&q=80",
+                banner: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
                 items: [
                     {
                         id: "item-3",
@@ -691,9 +694,6 @@
             }
         ];
 
-        // ==========================================
-        // 3. محرك التشغيل (لا تحتاج لتعديل أي شيء هنا)
-        // ==========================================
         let cart = [];
         let selectedTable = null;
         let toastTimeout;
@@ -715,7 +715,6 @@
             container.innerHTML = '';
 
             MENU_DATA.forEach((cat, idx) => {
-                // شريط التنقل
                 const pill = document.createElement('a');
                 pill.href = `#${cat.id}`;
                 pill.className = `nav-pill ${idx === 0 ? 'active' : ''}`;
@@ -726,7 +725,6 @@
                 };
                 nav.appendChild(pill);
 
-                // قسم المنيو
                 const section = document.createElement('div');
                 section.className = 'category-section';
                 section.id = cat.id;
@@ -809,7 +807,6 @@
         }
 
         function syncAllUI() {
-            // تحديث أزرار الكروت في المنيو
             MENU_DATA.forEach(cat => {
                 cat.items.forEach(item => {
                     const actionDiv = document.getElementById(`action-${item.id}`);
@@ -829,7 +826,6 @@
                 });
             });
 
-            // تحديث السلة والحسبة
             const cartList = document.getElementById('cart-list');
             const totalAmountElem = document.getElementById('total-amount');
             const floatingTotalElem = document.getElementById('floating-total');
@@ -917,7 +913,6 @@
             window.open(url, '_blank');
         }
 
-        // تشغيل النظام
         initApp();
     </script>
 </body>
