@@ -33,7 +33,7 @@
             font-family: 'Cairo', sans-serif;
             background: var(--bg);
             margin: 0;
-            padding: 0 0 90px 0;
+            padding: 0 0 95px 0;
             color: var(--text-main);
         }
 
@@ -147,7 +147,6 @@
             padding: 14px 16px;
             border-bottom: 1px solid #f0f2f1;
             gap: 14px;
-            transition: background 0.2s;
         }
 
         .item-card:last-child {
@@ -206,7 +205,7 @@
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            transition: transform 0.15s ease, background 0.2s;
+            transition: transform 0.15s ease;
             width: 100%;
         }
 
@@ -244,11 +243,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.1s;
-        }
-
-        .inline-btn:active {
-            transform: scale(0.85);
         }
 
         .inline-btn.minus {
@@ -282,20 +276,59 @@
             text-align: center;
         }
 
-        /* Table Selection */
-        .table-selection {
-            margin-bottom: 22px;
-            text-align: center;
+        /* Order Type Tabs (محلي - توصيل - سفري) */
+        .order-type-tabs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 18px;
             background: var(--bg);
-            padding: 15px;
-            border-radius: 12px;
+            padding: 6px;
+            border-radius: 14px;
         }
 
-        .table-selection p {
+        .type-tab {
+            background: transparent;
+            border: none;
+            padding: 10px 6px;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .type-tab span.icon {
+            font-size: 18px;
+        }
+
+        .type-tab.active {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Dynamic Service Details Box */
+        .service-details-box {
+            margin-bottom: 22px;
+            background: var(--bg);
+            padding: 16px;
+            border-radius: 12px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        .service-details-box p.box-label {
             font-weight: 700;
             margin: 0 0 12px;
             color: var(--text-main);
             font-size: 14px;
+            text-align: center;
         }
 
         .tables-grid {
@@ -328,6 +361,30 @@
             color: white;
             transform: scale(1.12);
             box-shadow: 0 4px 10px rgba(31, 78, 50, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1.5px solid #dce2df;
+            border-radius: 10px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+            background: white;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .custom-input:focus {
+            border-color: var(--primary);
         }
 
         /* Cart List */
@@ -388,11 +445,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.1s;
-        }
-
-        .qty-btn:active {
-            transform: scale(0.88);
         }
 
         .qty-btn.minus {
@@ -413,30 +465,28 @@
             color: var(--text-main);
         }
 
-        .notes-input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1.5px solid #dce2df;
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 13px;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-
-        .notes-input:focus {
-            border-color: var(--primary);
-        }
-
-        /* Total & Buttons */
-        .total-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Summary & Totals */
+        .summary-breakdown {
             background: #eef4f0;
             padding: 14px 18px;
             border-radius: 12px;
             margin-bottom: 18px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .summary-row.total-final {
+            border-top: 1px solid #cde0d4;
+            padding-top: 8px;
+            margin-top: 8px;
+            margin-bottom: 0;
             font-size: 17px;
             font-weight: 800;
             color: var(--primary);
@@ -458,7 +508,7 @@
             font-weight: 800;
             cursor: pointer;
             flex-grow: 1;
-            transition: transform 0.15s, background 0.2s;
+            transition: transform 0.15s;
             box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
         }
 
@@ -476,11 +526,6 @@
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .reset-btn:active {
-            background: #fad7d8;
         }
 
         /* Floating Bottom Bar */
@@ -560,7 +605,7 @@
 
     <header>
         <h1 id="rest-name">مطعم زيتون</h1>
-        <p id="rest-subtitle">المنيو الرقمي</p>
+        <p id="rest-subtitle">المنيو الرقمي - اطلب مباشرة بدون عمولات</p>
     </header>
 
     <!-- شريط الأقسام السريع -->
@@ -572,30 +617,57 @@
     <!-- قسم ملخص الطلب والدفع -->
     <div class="container">
         <div class="checkout-section" id="checkout">
-            <h3>ملخص طلبك</h3>
+            <h3>إتمام الطلب</h3>
 
-            <div class="table-selection">
-                <p>اختر رقم الطاولة:</p>
-                <div class="tables-grid" id="tables-container"></div>
+            <!-- أزرار اختيار نوع الخدمة -->
+            <div class="order-type-tabs">
+                <button class="type-tab active" id="tab-dinein" onclick="setOrderType('dinein')">
+                    <span class="icon">🍽️</span>
+                    <span>محلي (طاولة)</span>
+                </button>
+                <button class="type-tab" id="tab-delivery" onclick="setOrderType('delivery')">
+                    <span class="icon">🛵</span>
+                    <span>توصيل للبيت</span>
+                </button>
+                <button class="type-tab" id="tab-pickup" onclick="setOrderType('pickup')">
+                    <span class="icon">🛍️</span>
+                    <span>سفري (استلام)</span>
+                </button>
             </div>
 
+            <!-- تفاصيل الخدمة المتغيرة حسب الاختيار -->
+            <div class="service-details-box" id="service-details-box"></div>
+
+            <!-- قائمة الأصناف المختارة -->
             <ul class="cart-items-list" id="cart-list">
                 <li style="text-align: center; color: #888; padding: 25px 0;">السلة فارغة حالياً، اختر وجباتك من الأعلى</li>
             </ul>
 
+            <!-- ملاحظات إضافية -->
             <div class="notes-box">
-                <label for="order-notes">ملاحظات إضافية (اختياري):</label>
-                <input type="text" id="order-notes" class="notes-input" placeholder="مثال: بدون بصل، زيادة شطة، سفري...">
+                <label for="order-notes">ملاحظات إضافية للمطبخ (اختياري):</label>
+                <input type="text" id="order-notes" class="custom-input" placeholder="مثال: بدون بصل، زيادة شطة، خبز إضافي...">
             </div>
 
-            <div class="total-box">
-                <span>المجموع الكلي</span>
-                <span><span id="total-amount">0</span> <span class="currency-label">ريال</span></span>
+            <!-- الحسبة النهائية -->
+            <div class="summary-breakdown">
+                <div class="summary-row" id="subtotal-row" style="display: none;">
+                    <span>قيمة الطلبات</span>
+                    <span><span id="subtotal-amount">0</span> <span class="currency-label">ريال</span></span>
+                </div>
+                <div class="summary-row" id="delivery-fee-row" style="display: none;">
+                    <span>رسوم التوصيل</span>
+                    <span><span id="delivery-fee-amount">0</span> <span class="currency-label">ريال</span></span>
+                </div>
+                <div class="summary-row total-final">
+                    <span>المجموع الكلي</span>
+                    <span><span id="total-amount">0</span> <span class="currency-label">ريال</span></span>
+                </div>
             </div>
 
             <div class="action-btns">
-                <button class="reset-btn" onclick="resetCart()">إعادة الطلب</button>
-                <button class="whatsapp-checkout-btn" onclick="sendToWhatsApp()">تأكيد الطلب</button>
+                <button class="reset-btn" onclick="resetCart()">تفريغ السلة</button>
+                <button class="whatsapp-checkout-btn" onclick="sendToWhatsApp()">إرسال الطلب واتساب</button>
             </div>
         </div>
     </div>
@@ -604,7 +676,7 @@
     <a href="#checkout" class="floating-bar" id="floating-bar">
         <div class="floating-bar-right">
             <span class="badge-count" id="cart-count">0</span>
-            <span>اذهب للطلب</span>
+            <span>مراجعة وإرسال الطلب</span>
         </div>
         <div class="floating-bar-left">
             <span id="floating-total">0</span> <span class="currency-label">ريال</span>
@@ -612,22 +684,27 @@
     </a>
 
     <script>
-        // التأكد من أن الصفحة تبدأ دائماً من أعلى نقطة عند الفتح
+        // منع النزول التلقائي عند فتح الموقع
         if (window.location.hash) {
             history.replaceState(null, null, window.location.pathname);
         }
         window.scrollTo(0, 0);
 
-        // إعدادات المطعم
+        // ==========================================
+        // 1. لوحة إعدادات المطعم (عدّل هنا لأي عميل جديد)
+        // ==========================================
         const CONFIG = {
             restaurantName: "مطعم زيتون",
-            subtitle: "المنيو الرقمي",
-            whatsappNumber: "201021946002",
+            subtitle: "المنيو الرقمي - محلي • توصيل • سفري",
+            whatsappNumber: "201021946002", // رقم الواتساب بكود الدولة بدون +
             currency: "ريال",
-            tableCount: 10
+            tableCount: 10,
+            deliveryFee: 15 // رسوم التوصيل التلقائية عند اختيار "توصيل للبيت"
         };
 
-        // بيانات الأقسام والأصناف
+        // ==========================================
+        // 2. بيانات الأقسام والأصناف
+        // ==========================================
         const MENU_DATA = [
             {
                 id: "cat-kabsa",
@@ -653,7 +730,7 @@
             {
                 id: "cat-grills",
                 title: "قسم المشاوي على الفحم",
-                banner: "https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80",
+                banner: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&auto=format&fit=crop&q=80",
                 items: [
                     {
                         id: "item-3",
@@ -694,18 +771,22 @@
             }
         ];
 
+        // ==========================================
+        // 3. محرك التشغيل
+        // ==========================================
         let cart = [];
+        let orderType = 'dinein'; // dinein | delivery | pickup
         let selectedTable = null;
         let toastTimeout;
 
         function initApp() {
-            document.title = `${CONFIG.restaurantName} - ${CONFIG.subtitle}`;
+            document.title = `${CONFIG.restaurantName} - المنيو الرقمي`;
             document.getElementById('rest-name').innerText = CONFIG.restaurantName;
             document.getElementById('rest-subtitle').innerText = CONFIG.subtitle;
             document.querySelectorAll('.currency-label').forEach(el => el.innerText = CONFIG.currency);
 
             renderNavAndMenu();
-            renderTables();
+            setOrderType('dinein');
         }
 
         function renderNavAndMenu() {
@@ -756,20 +837,54 @@
             });
         }
 
-        function renderTables() {
-            const tablesContainer = document.getElementById('tables-container');
-            tablesContainer.innerHTML = '';
-            for (let i = 1; i <= CONFIG.tableCount; i++) {
-                const btn = document.createElement('button');
-                btn.className = 'table-btn';
-                btn.innerText = i;
-                btn.onclick = function() {
-                    document.querySelectorAll('.table-btn').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    selectedTable = i;
-                };
-                tablesContainer.appendChild(btn);
+        function setOrderType(type) {
+            orderType = type;
+            document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(`tab-${type}`).classList.add('active');
+
+            const box = document.getElementById('service-details-box');
+            if (type === 'dinein') {
+                let tablesHTML = '';
+                for (let i = 1; i <= CONFIG.tableCount; i++) {
+                    const isSelected = selectedTable === i ? 'selected' : '';
+                    tablesHTML += `<button class="table-btn ${isSelected}" onclick="selectTable(${i}, this)">${i}</button>`;
+                }
+                box.innerHTML = `
+                    <p class="box-label">اختر رقم الطاولة:</p>
+                    <div class="tables-grid">${tablesHTML}</div>
+                `;
+            } else if (type === 'delivery') {
+                box.innerHTML = `
+                    <p class="box-label">بيانات التوصيل (رسوم التوصيل: ${CONFIG.deliveryFee} ${CONFIG.currency}):</p>
+                    <div class="form-group">
+                        <input type="text" id="cust-name" class="custom-input" placeholder="الاسم الكريم *">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="cust-phone" class="custom-input" placeholder="رقم الجوال (05xxxxxxxx) *">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="cust-address" class="custom-input" placeholder="الحي، اسم الشارع، رقم المبنى *">
+                    </div>
+                `;
+            } else if (type === 'pickup') {
+                box.innerHTML = `
+                    <p class="box-label">استلام الطلب من الفرع (بدون رسوم توصيل):</p>
+                    <div class="form-group">
+                        <input type="text" id="pickup-name" class="custom-input" placeholder="اسم المستلم *">
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="pickup-phone" class="custom-input" placeholder="رقم الجوال للتواصل (اختياري)">
+                    </div>
+                `;
             }
+
+            syncAllUI();
+        }
+
+        function selectTable(num, btnElement) {
+            document.querySelectorAll('.table-btn').forEach(b => b.classList.remove('selected'));
+            btnElement.classList.add('selected');
+            selectedTable = num;
         }
 
         function findItemData(itemId) {
@@ -807,6 +922,7 @@
         }
 
         function syncAllUI() {
+            // تحديث أزرار الكروت في المنيو
             MENU_DATA.forEach(cat => {
                 cat.items.forEach(item => {
                     const actionDiv = document.getElementById(`action-${item.id}`);
@@ -827,6 +943,10 @@
             });
 
             const cartList = document.getElementById('cart-list');
+            const subtotalRow = document.getElementById('subtotal-row');
+            const deliveryFeeRow = document.getElementById('delivery-fee-row');
+            const subtotalElem = document.getElementById('subtotal-amount');
+            const deliveryFeeElem = document.getElementById('delivery-fee-amount');
             const totalAmountElem = document.getElementById('total-amount');
             const floatingTotalElem = document.getElementById('floating-total');
             const cartCountElem = document.getElementById('cart-count');
@@ -835,6 +955,8 @@
             cartList.innerHTML = '';
             if (cart.length === 0) {
                 cartList.innerHTML = '<li style="text-align: center; color: #888; padding: 25px 0;">السلة فارغة حالياً، اختر وجباتك من الأعلى</li>';
+                subtotalRow.style.display = 'none';
+                deliveryFeeRow.style.display = 'none';
                 totalAmountElem.innerText = '0';
                 floatingTotalElem.innerText = '0';
                 cartCountElem.innerText = '0';
@@ -842,11 +964,11 @@
                 return;
             }
 
-            let total = 0;
+            let itemsSubtotal = 0;
             let totalCount = 0;
             cart.forEach(item => {
                 const subTotal = item.price * item.qty;
-                total += subTotal;
+                itemsSubtotal += subTotal;
                 totalCount += item.qty;
 
                 const li = document.createElement('li');
@@ -864,8 +986,21 @@
                 cartList.appendChild(li);
             });
 
-            totalAmountElem.innerText = total;
-            floatingTotalElem.innerText = total;
+            const activeDeliveryFee = (orderType === 'delivery') ? CONFIG.deliveryFee : 0;
+            const finalTotal = itemsSubtotal + activeDeliveryFee;
+
+            if (activeDeliveryFee > 0) {
+                subtotalRow.style.display = 'flex';
+                deliveryFeeRow.style.display = 'flex';
+                subtotalElem.innerText = itemsSubtotal;
+                deliveryFeeElem.innerText = activeDeliveryFee;
+            } else {
+                subtotalRow.style.display = 'none';
+                deliveryFeeRow.style.display = 'none';
+            }
+
+            totalAmountElem.innerText = finalTotal;
+            floatingTotalElem.innerText = finalTotal;
             cartCountElem.innerText = totalCount;
             floatingBar.classList.add('visible');
         }
@@ -874,40 +1009,78 @@
             cart = [];
             selectedTable = null;
             document.getElementById('order-notes').value = '';
-            document.querySelectorAll('.table-btn').forEach(b => b.classList.remove('selected'));
-            syncAllUI();
+            setOrderType(orderType);
             showToast('تم تفريغ السلة');
         }
 
         function sendToWhatsApp() {
-            if (!selectedTable) {
-                alert('من فضلك اختر رقم الطاولة أولاً!');
-                document.querySelector('.table-selection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (cart.length === 0) {
+                alert('الرجاء إضافة وجبة واحدة على الأقل قبل إرسال الطلب!');
                 return;
             }
-            if (cart.length === 0) {
-                alert('الرجاء إضافة وجبة واحدة على الأقل قبل تأكيد الطلب!');
-                return;
+
+            let serviceHeader = '';
+
+            if (orderType === 'dinein') {
+                if (!selectedTable) {
+                    alert('من فضلك اختر رقم الطاولة أولاً!');
+                    document.getElementById('service-details-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+                serviceHeader = `📌 *نوع الطلب:* محلي (طاولة رقم ${selectedTable})\n`;
+            } else if (orderType === 'delivery') {
+                const name = document.getElementById('cust-name').value.trim();
+                const phone = document.getElementById('cust-phone').value.trim();
+                const address = document.getElementById('cust-address').value.trim();
+                if (!name || !phone || !address) {
+                    alert('من فضلك أكمل بيانات التوصيل (الاسم، الجوال، والعنوان)!');
+                    document.getElementById('service-details-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+                serviceHeader = `📌 *نوع الطلب:* توصيل للمنزل 🛵\n`;
+                serviceHeader += `👤 *الاسم:* ${name}\n`;
+                serviceHeader += `📞 *الجوال:* ${phone}\n`;
+                serviceHeader += `📍 *العنوان:* ${address}\n`;
+            } else if (orderType === 'pickup') {
+                const name = document.getElementById('pickup-name').value.trim();
+                const phone = document.getElementById('pickup-phone').value.trim();
+                if (!name) {
+                    alert('من فضلك اكتب اسم المستلم!');
+                    document.getElementById('service-details-box').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+                serviceHeader = `📌 *نوع الطلب:* سفري (استلام من الفرع) 🛍️\n`;
+                serviceHeader += `👤 *اسم المستلم:* ${name}\n`;
+                if (phone) serviceHeader += `📞 *الجوال:* ${phone}\n`;
             }
 
             const notes = document.getElementById('order-notes').value.trim();
-            let total = 0;
+            let itemsSubtotal = 0;
 
-            let message = `طلب جديد\n`;
-            message += `رقم الطاولة: *${selectedTable}*\n\n`;
-            message += `المطلوب :\n`;
+            let message = `🔔 *طلب جديد عبر المنيو الرقمي*\n`;
+            message += `--------------------------------\n`;
+            message += serviceHeader;
+            message += `\n🛒 *المطلوب:*\n`;
 
             cart.forEach(item => {
                 const subTotal = item.price * item.qty;
-                total += subTotal;
+                itemsSubtotal += subTotal;
                 message += `- ${item.name} (عدد: ${item.qty}) - ${subTotal} ${CONFIG.currency}\n`;
             });
 
-            if (notes) {
-                message += `\nملاحظات: ${notes}\n`;
+            const activeDeliveryFee = (orderType === 'delivery') ? CONFIG.deliveryFee : 0;
+            const finalTotal = itemsSubtotal + activeDeliveryFee;
+
+            if (activeDeliveryFee > 0) {
+                message += `\n🚚 *رسوم التوصيل:* ${activeDeliveryFee} ${CONFIG.currency}\n`;
             }
 
-            message += `\n*المجموع الكلي: ${total} ${CONFIG.currency}*`;
+            if (notes) {
+                message += `📝 *ملاحظات:* ${notes}\n`;
+            }
+
+            message += `--------------------------------\n`;
+            message += `💰 *المجموع الكلي: ${finalTotal} ${CONFIG.currency}*`;
 
             const url = `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
