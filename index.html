@@ -87,6 +87,22 @@
                 <button class="add-btn" onclick="addToCart('مضبي دجاج عهدي', 38)">إضافة +</button>
             </div>
         </div>
+
+        <!-- قسم المشاوي -->
+        <div class="category-section">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80" alt="المشاوي" class="category-banner">
+            <h3 class="category-title">قسم المشاوي على الفحم</h3>
+            
+            <div class="item-card">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=200&auto=format&fit=crop&q=80" alt="مشاوي مشكلة" class="item-img">
+                <div class="item-details">
+                    <h4>مشاوي زيتون مشكلة</h4>
+                    <p>تشكيلة لحم وستيك مشوي على الفحم الحطب</p>
+                    <span class="item-price">68 ريال</span>
+                </div>
+                <button class="add-btn" onclick="addToCart('مشاوي زيتون مشكلة', 68)">إضافة +</button>
+            </div>
+        </div>
     </div>
 
     <!-- قسم سلة الطلبات واختيار الترابيزة والحسبة النهائية -->
@@ -94,11 +110,11 @@
         <div class="checkout-section" id="checkout">
             <h3>🛒 ملخص طلبك</h3>
             
-            <!-- اختيار الترابيزة -->
+            <!-- اختيار الترابيزة من 1 إلى 10 في دوائر -->
             <div class="table-selection">
                 <p>اختر رقم الطاولة (الترابيزة):</p>
                 <div class="tables-grid" id="tables-container">
-                    <!-- سيتم توليد أزرار الطاولات من 1 إلى 10 أوتوماتيك عبر الجافاسكريبت -->
+                    <!-- يتم توليد الأزرار أوتوماتيك -->
                 </div>
             </div>
 
@@ -116,7 +132,7 @@
         let cart = [];
         let selectedTable = "غير محددة";
 
-        // توليد أزرار الطاولات من 1 إلى 10
+        // توليد أزرار الطاولات من 1 إلى 10 في دوائر
         const tablesContainer = document.getElementById('tables-container');
         for (let i = 1; i <= 10; i++) {
             let btn = document.createElement('button');
@@ -169,6 +185,10 @@
         }
 
         function sendToWhatsApp() {
+            if (selectedTable === "غير محددة") {
+                alert('من فضلك اختر رقم الطاولة (الترابيزة) أولاً!');
+                return;
+            }
             if (cart.length === 0) {
                 alert('الرجاء إضافة بعض الأطباق أولاً قبل تأكيد الطلب!');
                 return;
@@ -185,7 +205,8 @@
             });
             message += `%0a💰 *المجموع الكلي: ${total} ريال*`;
 
-            let phone = "966500000000"; // رقم الواتساب الخاص بالمطعم
+            // الرقم اللي طلبته (الرقم المصري مضافاً له كود الدولة +20)
+            let phone = "201021946002";
             let url = `https://wa.me/${phone}?text=${message}`;
             window.open(url, '_blank');
         }
