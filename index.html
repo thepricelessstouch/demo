@@ -5,35 +5,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مطعم زيتون - Zaitoon Restaurant</title>
     <style>
-        body { font-family: Tahoma, sans-serif; background: #f9f9f9; margin: 0; padding: 20px; color: #333; text-align: center; }
-        .header { background: #2c5e3b; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        .menu-card { background: white; padding: 15px; margin: 10px auto; max-width: 500px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: right; display: flex; justify-content: space-between; align-items: center; }
-        .price { color: #2c5e3b; font-weight: bold; }
-        .btn { background: #25d366; color: white; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; font-size: 14px; }
+        :root {
+            --primary: #2c5e3b;
+            --secondary: #d4a373;
+            --bg: #f9f9f9;
+            --text: #333;
+            --white: #ffffff;
+        }
+        body { font-family: Tahoma, sans-serif; background: var(--bg); margin: 0; padding: 0; color: var(--text); }
+        header { background: var(--primary); color: var(--white); text-align: center; padding: 30px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        header h1 { margin: 0; font-size: 28px; letter-spacing: 1px; }
+        header p { margin: 5px 0 0; font-size: 14px; opacity: 0.9; }
+        
+        .container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
+        
+        .category-section { margin-bottom: 35px; background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 3px 10px rgba(0,0,0,0.05); }
+        .category-banner { width: 100%; height: 180px; object-fit: cover; }
+        .category-title { padding: 15px 20px 5px; font-size: 20px; color: var(--primary); border-bottom: 2px solid var(--bg); margin: 0; }
+        
+        .item-card { display: flex; align-items: center; padding: 15px 20px; border-bottom: 1px solid #eee; justify-content: space-between; gap: 15px; }
+        .item-card:last-child { border-bottom: none; }
+        .item-img { width: 70px; height: 70px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+        .item-details { flex-grow: 1; text-align: right; }
+        .item-details h4 { margin: 0 0 5px; font-size: 16px; color: var(--text); }
+        .item-details p { margin: 0; font-size: 13px; color: #666; }
+        .item-price { font-weight: bold; color: var(--primary); font-size: 15px; margin-top: 5px; display: block; }
+        
+        .add-btn { background: var(--primary); color: var(--white); border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 14px; transition: 0.2s; }
+        .add-btn:active { transform: scale(0.95); }
+        
+        /* Checkout Section at the bottom */
+        .checkout-section { background: var(--white); padding: 25px; border-radius: 12px; margin-top: 40px; margin-bottom: 40px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); text-align: center; }
+        .checkout-section h3 { margin-top: 0; color: var(--primary); }
+        .cart-items-list { list-style: none; padding: 0; margin: 15px 0; text-align: right; max-height: 200px; overflow-y: auto; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+        .cart-item-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #f1f1f1; font-size: 14px; }
+        .total-price { font-size: 18px; font-weight: bold; color: var(--primary); margin: 15px 0; }
+        
+        .whatsapp-checkout-btn { background: #25d366; color: var(--white); border: none; padding: 12px 25px; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; text-decoration: none; display: inline-block; transition: 0.2s; box-sizing: border-box; }
+        .whatsapp-checkout-btn:hover { background: #20ba5a; }
+        
+        .go-to-cart { position: fixed; bottom: 20px; left: 20px; background: var(--secondary); color: white; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 100; font-size: 14px; }
     </style>
 </head>
 <body>
-    <div class="header">
+
+    <header>
         <h1>مطعم زيتون 🌿</h1>
-        <p>المنيو التجريبي - الديمو الأول</p>
+        <p>الأصالة السعودية بلمسة عصرية - المنيو الرقمي</p>
+    </header>
+
+    <div class="container" id="menu-container">
+        <!-- قسم الكبسات -->
+        <div class="category-section">
+            <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800&auto=format&fit=crop&q=80" alt="الكبسات" class="category-banner">
+            <h3 class="category-title">قسم الكبسات والأرز الفاخر</h3>
+            
+            <div class="item-card">
+                <img src="https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?w=200&auto=format&fit=crop&q=80" alt="كبسة لحم" class="item-img">
+                <div class="item-details">
+                    <h4>كبسة لحم حاشي</h4>
+                    <p>أرز بلدي مع لحم حاشي طازج وبهارات زيتون الخاصة</p>
+                    <span class="item-price">55 ريال</span>
+                </div>
+                <button class="add-btn" onclick="addToCart('كبسة لحم حاشي', 55)">إضافة +</button>
+            </div>
+
+            <div class="item-card">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=200&auto=format&fit=crop&q=80" alt="مضبي دجاج" class="item-img">
+                <div class="item-details">
+                    <h4>مضبي دجاج عهدي</h4>
+                    <p>دجاج مشوي على الحصى الطازج مع أرز البشاور</p>
+                    <span class="item-price">38 ريال</span>
+                </div>
+                <button class="add-btn" onclick="addToCart('مضبي دجاج عهدي', 38)">إضافة +</button>
+            </div>
+        </div>
+
+        <!-- قسم المشاوي -->
+        <div class="category-section">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&auto=format&fit=crop&q=80" alt="المشاوي" class="category-banner">
+            <h3 class="category-title">قسم المشاوي على الفحم</h3>
+            
+            <div class="item-card">
+                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=200&auto=format&fit=crop&q=80" alt="مشاوي مشكلة" class="item-img">
+                <div class="item-details">
+                    <h4>مشاوي زيتون مشكلة (سيخ كباب وأوصال)</h4>
+                    <p>تشكيلة لحم وستيك مشوي على الفحم الحطب</p>
+                    <span class="item-price">68 ريال</span>
+                </div>
+                <button class="add-btn" onclick="addToCart('مشاوي زيتون مشكلة', 68)">إضافة +</button>
+            </div>
+        </div>
     </div>
 
-    <div class="menu-card">
-        <div>
-            <h3>كبسة لحم مميزة</h3>
-            <p style="font-size: 13px; color: #666;">أرز بالبهارات السعودية الفاخرة مع لحم طازج</p>
-            <span class="price">48 ريال</span>
+    <!-- قسم سلة الطلبات والحسبة النهائية -->
+    <div class="container">
+        <div class="checkout-section" id="checkout">
+            <h3>🛒 ملخص طلبك</h3>
+            <ul class="cart-items-list" id="cart-list">
+                <li style="text-align: center; color: #888; padding: 20px;">السلة فارغة حالياً، اختر أطباقك المفضلة بالأعلى.</li>
+            </ul>
+            <div class="total-price">المجموع الكلي: <span id="total-amount">0</span> ريال</div>
+            <button class="whatsapp-checkout-btn" onclick="sendToWhatsApp()">تأكد الطلب عبر الواتساب 📱</button>
         </div>
-        <a href="https://wa.me/966500000000?text=أريد%20طلب%20كبسة%20لحم" class="btn">طلب واتساب</a>
     </div>
 
-    <div class="menu-card">
-        <div>
-            <h3>مشاوي مشكلة (زيتون)</h3>
-            <p style="font-size: 13px; color: #666;">تشكيلة لحوم أوصال وشيش طاووق وكباب</p>
-            <span class="price">65 ريال</span>
-        </div>
-        <a href="https://wa.me/966500000000?text=أريد%20طلب%20مشاوي%20مشكلة" class="btn">طلب واتساب</a>
-    </div>
+    <a href="#checkout" class="go-to-cart">🛒 اذهب للطلب (<span id="cart-count">0</span>)</a>
+
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+            let existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            let cartList = document.getElementById('cart-list');
+            let totalAmountElem = document.getElementById('total-amount');
+            let cartCountElem = document.getElementById('cart-count');
+            
+            cartList.innerHTML = '';
+            if (cart.length === 0) {
+                cartList.innerHTML = '<li style="text-align: center; color: #888; padding: 20px;">السلة فارغة حالياً، اختر أطباقك المفضلة بالأعلى.</li>';
+                totalAmountElem.innerText = '0';
+                cartCountElem.innerText = '0';
+                return;
+            }
+
+            let total = 0;
+            let totalCount = 0;
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                totalCount += item.qty;
+                let li = document.createElement('li');
+                li.className = 'cart-item-row';
+                li.innerHTML = `<span>${item.name} (x${item.qty})</span> <strong>${item.price * item.qty} ريال</strong>`;
+                cartList.appendChild(li);
+            });
+
+            totalAmountElem.innerText = total;
+            cartCountElem.innerText = totalCount;
+        }
+
+        function sendToWhatsApp() {
+            if (cart.length === 0) {
+                alert('الرجاء إضافة بعض الأطباق أولاً قبل تأكيد الطلب!');
+                return;
+            }
+
+            let message = "مرحباً، أود طلب الأطباق التالية من مطعم زيتون:%0a";
+            let total = 0;
+            cart.forEach(item => {
+                message += `- ${item.name} (عدد: ${item.qty}) - السعر: ${item.price * item.qty} ريال%0a`;
+                total += item.price * item.qty;
+            });
+            message += `%0a*المجموع الكلي: ${total} ريال*`;
+
+            // استبدل الرقم أدناه برقم الواتساب الخاص بالمطعم في السعودية
+            let phone = "966500000000";
+            let url = `https://wa.me/${phone}?text=${message}`;
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
